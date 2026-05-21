@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenStudy - Connect. Learn. Grow.</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app"></div>
+    
+    <!-- Landing Page -->
+    <div id="landing" class="page">
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="logo">📚 GenStudy</h1>
+                <div class="nav-links">
+                    <a href="#login" onclick="showPage('login')">Login</a>
+                    <a href="#signup" onclick="showPage('signup')" class="btn-primary">Sign Up</a>
+                </div>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Connect with Students Worldwide</h2>
+                <p>Share notes, discuss assignments, find study partners, and ace your exams together</p>
+                <button class="btn-primary btn-large" onclick="showPage('signup')">Get Started Free</button>
+            </div>
+            <div class="hero-image">
+                <div class="placeholder">👥💬📚</div>
+            </div>
+        </section>
+
+        <section class="features">
+            <h3>Why GenStudy?</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon">💬</div>
+                    <h4>Real-time Chat</h4>
+                    <p>Connect instantly with classmates and discuss assignments</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">👥</div>
+                    <h4>Study Groups</h4>
+                    <p>Create or join groups for your courses and subjects</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">📁</div>
+                    <h4>File Sharing</h4>
+                    <p>Share notes, PDFs, and study materials easily</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🔍</div>
+                    <h4>Find Partners</h4>
+                    <p>Discover and connect with students in your courses</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login" class="page hidden">
+        <div class="auth-container">
+            <div class="auth-card">
+                <h2>Welcome Back</h2>
+                <p class="auth-subtitle">Login to GenStudy</p>
+                
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn-primary btn-full">Login</button>
+                </form>
+
+                <p class="auth-footer">Don't have an account? <a href="#signup" onclick="showPage('signup')">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Page -->
+    <div id="signup" class="page hidden">
+        <div class="auth-container">
+            <div class="auth-card">
+                <h2>Join GenStudy</h2>
+                <p class="auth-subtitle">Create your account</p>
+                
+                <form id="signupForm" onsubmit="handleSignup(event)">
+                    <div class="form-group">
+                        <label for="signupName">Full Name</label>
+                        <input type="text" id="signupName" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email</label>
+                        <input type="email" id="signupEmail" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupUniversity">University/School</label>
+                        <input type="text" id="signupUniversity" placeholder="MIT" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" placeholder="••••••••" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupCourse">Course/Major</label>
+                        <input type="text" id="signupCourse" placeholder="Computer Science" required>
+                    </div>
+                    <button type="submit" class="btn-primary btn-full">Create Account</button>
+                </form>
+
+                <p class="auth-footer">Already have an account? <a href="#login" onclick="showPage('login')">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Page -->
+    <div id="chat" class="page hidden">
+        <div class="chat-container">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <h3>GenStudy</h3>
+                    <button class="btn-icon" onclick="handleLogout()">🚪</button>
+                </div>
+
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search students..." onkeyup="searchStudents()">
+                </div>
+
+                <div class="sidebar-section">
+                    <h4>Direct Messages</h4>
+                    <div id="dmList" class="chat-list">
+                        <p class="empty-state">No chats yet</p>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h4>Study Groups</h4>
+                    <button class="btn-small" onclick="showCreateGroup()">+ New Group</button>
+                    <div id="groupList" class="chat-list">
+                        <p class="empty-state">No groups yet</p>
+                    </div>
+                </div>
+
+                <div class="sidebar-footer">
+                    <button class="btn-secondary" onclick="showProfile()">👤 Profile</button>
+                </div>
+            </div>
+
+            <!-- Main Chat Area -->
+            <div class="main-chat">
+                <div class="chat-header">
+                    <div class="chat-info">
+                        <h3 id="chatName">Select a chat</h3>
+                        <p id="chatStatus" class="status">•</p>
+                    </div>
+                    <div class="chat-actions">
+                        <button class="btn-icon">📞</button>
+                        <button class="btn-icon">🎥</button>
+                        <button class="btn-icon">ℹ️</button>
+                    </div>
+                </div>
+
+                <div id="messagesContainer" class="messages-container">
+                    <div class="welcome-message">
+                        <h2>Welcome to GenStudy! 📚</h2>
+                        <p>Select a chat to start messaging or create a new study group</p>
+                    </div>
+                </div>
+
+                <div class="message-input-area">
+                    <input type="text" id="messageInput" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+                    <button class="btn-icon" onclick="sendMessage()">📎</button>
+                    <button class="btn-primary" onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
